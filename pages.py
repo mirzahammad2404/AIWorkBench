@@ -37,7 +37,7 @@ CONTACT = """<p class="lead">Have a question, a prompt idea, a tool you want rev
 <label for="em">Your email</label><input id="em" type="email" name="email" required autocomplete="email">
 <label for="s">Subject</label><input id="s" name="subject" required>
 <label for="m">Message</label><textarea id="m" name="message" rows="6" required></textarea>
-<button class="btn" type="submit">Send message</button></form>
+<button class="btn" type="submit">Send message</button><div id="fm" role="status" aria-live="polite"></div></form>
 <h2>Before you write</h2><p>We cannot give personal tech support, but we read every message about content ideas, corrections and partnerships.</p>"""
 
 THANKS = "<p class=\"lead\">Thanks, your message has been sent. We will get back to you soon.</p><p><a class=\"btn\" href=\"/\">Back to home</a></p>"
