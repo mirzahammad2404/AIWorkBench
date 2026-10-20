@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """AI Workbench static site builder. `python build.py` -> /dist (Netlify runs this automatically).
 Content: posts.py (prompts/posts), pages.py (page text). Covers: images/<slug>.webp"""
-import os, shutil, json, html
+import os, re, shutil, json, html
 from datetime import date
 import pages as P
 from posts import POSTS
@@ -16,6 +16,8 @@ ADSENSE = ""                # after approval: "ca-pub-XXXXXXXXXXXXXXXX"
 
 e = html.escape
 OUT = "dist"
+CSS = re.sub(r"\n\s*", "", open("style.css", encoding="utf-8").read())
+FONT = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap"
 NAV = [("/", "Home"), ("/prompts/", "AI Prompts"), ("/blog/", "Blog"), ("/about/", "About"), ("/contact/", "Contact")]
 
 def img_for(slug):
@@ -37,8 +39,8 @@ def head(title, desc, path, og="", extra=""):
 <meta property="og:type" content="website"><meta property="og:site_name" content="{NAME}"><meta property="og:title" content="{e(full)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{img}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">{ads}{extra}</head><body>
+<link rel="preload" as="style" href="{FONT}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{FONT}"></noscript>
+<style>{CSS}</style>{ads}{extra}</head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="hd"><div class="w bar"><a class="logo" href="/" aria-label="{NAME} home"><i>W</i>{NAME}</a>
 <button class="bg" id="bg" aria-label="Open menu" aria-expanded="false" aria-controls="nv"><span aria-hidden="true">&#9776;</span><span>Menu</span></button>
@@ -59,7 +61,7 @@ def ld(o): return f'<script type="application/ld+json">{json.dumps(o)}</script>'
 def card(p):
     im = img_for(p["slug"])
     pic = f'<img src="{im}" alt="{e(p["title"])}" width="640" height="360" loading="lazy">' if im else f'<div class="ph" style="--h:{p["hue"]}"></div>'
-    return f'<article class="card"><a href="/{p["slug"]}/" class="cvr" tabindex="-1" aria-hidden="true">{pic}</a><div class="cb"><span class="tag">{e(p["cat"])}</span><h3><a href="/{p["slug"]}/">{e(p["title"])}</a></h3><p>{e(p["intro"][:115])}...</p><a class="more" href="/{p["slug"]}/">Read more</a></div></article>'
+    return f'<article class="card"><a href="/{p["slug"]}/" class="cvr" tabindex="-1" aria-hidden="true">{pic}</a><div class="cb"><span class="tag">{e(p["cat"])}</span><h3><a href="/{p["slug"]}/">{e(p["title"])}</a></h3><p>{e(p["intro"][:115])}...</p><a class="more" href="/{p["slug"]}/">Read more<span class="sr"> about {e(p["title"])}</span></a></div></article>'
 
 def crumbs(items):
     lis = "".join(f'<li><a href="{u}">{t}</a></li>' if u else f"<li>{t}</li>" for t, u in items)
@@ -104,7 +106,7 @@ def main():
 <div class="row"><a class="btn" href="/prompts/">Browse free AI prompts</a><a class="btn ghost" href="/blog/">Read the guides</a></div>
 <ul class="proof"><li>100% free</li><li>No sign-up</li><li>Copy in one tap</li></ul>
 <p class="for"><b>Made for</b> content creators, freelancers, students and small business owners.</p></div>{demo}</div></section>"""
-    sec = lambda h, sub, items, link: f'<section class="w sec"><div class="sh"><div><h2>{h}</h2><p>{sub}</p></div><a href="{link}">See all</a></div><div class="grid">{"".join(card(p) for p in items[:6])}</div></section>'
+    sec = lambda h, sub, items, link: f'<section class="w sec"><div class="sh"><div><h2>{h}</h2><p>{sub}</p></div><a href="{link}">See all<span class="sr"> {h.lower()}</span></a></div><div class="grid">{"".join(card(p) for p in items[:6])}</div></section>'
     write("/", head(f"{NAME}: Free AI Prompts, Tools and Guides", "Free AI prompts you can copy and use in ChatGPT, Gemini and Claude, plus simple AI tool guides and tutorials for creators, freelancers and students.", "/", extra=hj) + hero + sec("Latest AI prompts", "Copy a prompt, fill in the brackets and paste it into your AI tool.", prompts, "/prompts/") + sec("New guides and tips", "Plain-language help for getting more from AI.", posts, "/blog/") + P.HOME_INTRO + faqblock(P.HOME_FAQ) + foot())
 
     listing("Free AI Prompts", "AI Prompts", "Free, ready-to-use AI prompts for ChatGPT, Gemini and Claude. Copy a prompt, edit the brackets and get better results.", "/prompts/", prompts, "Copy a prompt, replace the brackets with your details and paste it into your favourite AI tool.")

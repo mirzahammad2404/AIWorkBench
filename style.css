@@ -1,4 +1,4 @@
-:root,[data-theme=candle]{--bg:#FBF5E9;--surf:#fff;--ink:#1D3A33;--mut:#4F635D;--cta:#D64B38;--cta-ink:#fff;--cta-h:#B93C2B;--acc:#3E7A4D;--tint:#EAF2E6;--line:#E8DDC8;--dark:#1D3A33;--dark-ink:#FBF5E9}
+:root,[data-theme=candle]{--bg:#FBF5E9;--surf:#fff;--ink:#1D3A33;--mut:#4F635D;--cta:#C23F2D;--cta-ink:#fff;--cta-h:#A63120;--acc:#2F6B3F;--tint:#EAF2E6;--line:#E8DDC8;--dark:#1D3A33;--dark-ink:#FBF5E9}
 [data-theme=fresh]{--bg:#fff;--surf:#F4F7FE;--ink:#0B1F4B;--mut:#46557A;--cta:#FF7A1A;--cta-ink:#0B1F4B;--cta-h:#E96A0C;--acc:#2563EB;--tint:#E8EFFE;--line:#DCE4F5;--dark:#0B1F4B;--dark-ink:#fff}
 :root{--hd:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;--bd:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--r:16px}
 *,*:before,*:after{box-sizing:border-box}html{scroll-behavior:smooth}
@@ -58,3 +58,4 @@ nav a:not(.btn):hover,nav a[aria-current]{color:var(--ink);background:var(--tint
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 .pg p,.pg li,.sec p{overflow-wrap:anywhere}
 @media(max-width:600px){.hero .row .btn{width:100%}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
