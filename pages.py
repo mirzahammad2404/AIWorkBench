@@ -5,7 +5,7 @@ HOME_INTRO = """<section class="w sec intro"><h2>What is AI Workbench?</h2>
 <p>AI Workbench is a free resource hub for people who want to use artificial intelligence without wasting hours searching. We collect, test and organise the best <strong>AI prompts</strong>, <strong>AI tools</strong> and <strong>step-by-step AI tutorials</strong> in one place, so you can find what works and use it today.</p>
 <p>Think of us as a guide between you and the AI world. You tell us what you want to do, such as writing an email, planning a video or studying for an exam. We point you to a ready-made prompt or the right tool, and show you how to use it.</p></section>
 <section class="w sec"><h2>How AI Workbench helps you</h2><div class="steps">
-<div><h3>Find a prompt that works</h3><p>Browse free prompts for ChatGPT, Gemini and Claude. Copy one with a single tap, replace the brackets and paste it into your AI tool.</p></div>
+<div><h3>Find a prompt that works</h3><p>Browse free prompts for AI video and picture tools. Copy one with a single tap, replace the brackets and paste it into your AI tool.</p></div>
 <div><h3>Choose the right AI tool</h3><p>We compare AI tools in plain words, including what they do well, where they fall short and who they suit best.</p></div>
 <div><h3>Learn the basics fast</h3><p>Our guides explain prompt engineering, AI writing, AI video and AI automation without jargon, so beginners can follow along.</p></div></div></section>
 <section class="w sec"><h2>Who is AI Workbench for?</h2>
@@ -14,21 +14,21 @@ HOME_INTRO = """<section class="w sec intro"><h2>What is AI Workbench?</h2>
 HOME_FAQ = [
  ("What is an AI prompt?", "An AI prompt is the instruction you type into an AI tool such as ChatGPT, Gemini or Claude. A clear prompt that names a role, a goal and a format gives you a much better answer."),
  ("Are the prompts on AI Workbench free?", "Yes. Every prompt and guide on the site is free to read and copy."),
- ("Which AI tools do the prompts work with?", "Most prompts work in ChatGPT, Google Gemini and Claude. Each prompt page says if it suits a particular tool."),
+ ("Which AI tools do the prompts work with?", "Most prompts work in popular AI chat, image and video tools. Each prompt says what kind of tool it is made for."),
  ("How often is new content added?", "We publish new prompts and guides regularly. Follow us on TikTok, Instagram or Facebook to see them first."),
 ]
 
-ABOUT = f"""<p class="lead">Our mission is simple: make AI easy to understand and useful in everyday life.</p>
+ABOUT = """<p class="lead">Our mission is simple: make AI easy to understand and useful in everyday life.</p>
 <h2>Why AI Workbench exists</h2>
 <p>New AI tools launch every week, and most advice online is either too technical or full of hype. Beginners end up with ten open tabs and no clear answer. AI Workbench was built to fix that by acting as a trusted guide between you and the AI world.</p>
 <h2>What you will find here</h2>
-<p><strong>AI prompts:</strong> ready-to-use prompts for writing, marketing, study, video and business. <strong>AI tool guides:</strong> plain-language explanations of popular tools and what each one is best for. <strong>Tutorials:</strong> step-by-step how-tos with real examples.</p>
+<p><strong>AI prompts:</strong> ready-to-use prompts for video, pictures, writing, marketing and study. <strong>AI tool guides:</strong> plain-language explanations of popular tools and what each one is best for. <strong>Tutorials:</strong> step-by-step how-tos with real examples.</p>
 <h2>How we create content</h2>
 <p>We aim to publish only what is clear, useful and accurate. Prompts are tried before they go live, guides are written in simple words, and we update posts when tools change. If we recommend a paid tool, we say so openly (see our <a href="/disclaimer/">disclaimer</a>).</p>
 <h2>How the site is funded</h2>
 <p>AI Workbench is free to use. It is supported by advertising (Google AdSense) and, in some cases, affiliate links. This never changes what we recommend. If something is not good, we will say so.</p>
 <h2>Join the community</h2>
-<p>We share short AI tips on TikTok, Instagram and Facebook. Find the links in the footer, or <a href="/contact/">send us a message</a> with a prompt idea or a tool you want reviewed.</p>"""
+<p>We share short AI tips on TikTok, Instagram and Facebook. Find us there, or <a href="/contact/">send us a message</a> with a prompt idea or a tool you want reviewed.</p>"""
 
 CONTACT = """<p class="lead">Have a question, a prompt idea, a tool you want reviewed or a business enquiry? Send us a message and we will reply as soon as we can.</p>
 <form name="contact" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" class="form">

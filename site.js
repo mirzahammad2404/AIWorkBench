@@ -5,15 +5,17 @@ function setMenu(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',
 if(b){b.onclick=function(){setMenu(!n.classList.contains('open'))};n.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
 document.addEventListener('click',function(e){if(!e.target.closest('.hd'))setMenu(false)})}
-document.querySelectorAll('.copy').forEach(function(c){c.onclick=function(){var p=document.getElementById(c.dataset.for),x=p.textContent;
-var ok=function(){toast('Prompt copied! Paste it into your AI tool.')};
-var no=function(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);toast('Could not copy automatically. The prompt is selected, press Ctrl+C (or Copy).',1)};
-if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,no)}else no()}});
-var q=document.getElementById('q'),fc=document.getElementById('fc'),ty='';
-function filt(){var v=q?q.value.toLowerCase():'',k=0;document.querySelectorAll('#gr .card').forEach(function(x){var s=(!ty||x.dataset.type===ty)&&x.textContent.toLowerCase().indexOf(v)>-1;x.style.display=s?'':'none';if(s)k++});
-var e=document.getElementById('none');if(e)e.hidden=k>0}
-if(q)q.oninput=filt;
-if(fc)fc.onclick=function(ev){var b=ev.target.closest('.chip');if(!b)return;fc.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');c.setAttribute('aria-pressed','false')});b.classList.add('on');b.setAttribute('aria-pressed','true');ty=b.dataset.t;filt()};
+var PD=null,ld=null;
+function load(){if(!ld)ld=fetch('/prompts.json').then(function(r){return r.json()}).then(function(d){PD=d;return d});return ld}
+function copyText(x){var ok=function(){toast('Prompt copied! Paste it into your AI tool.')};
+var no=function(){toast('Could not copy automatically. Please try again or use another browser.',1)};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,no)}else no()}
+document.querySelectorAll('.copy').forEach(function(c){c.onclick=function(){var s=c.dataset.slug;if(PD&&PD[s]){copyText(PD[s]);return}
+load().then(function(d){copyText(d[s])},function(){toast('Could not load the prompt. Please refresh and try again.',1)})}});
+if(document.querySelector('.copy[data-slug]'))setTimeout(load,600);
+var q=document.getElementById('q');
+if(q)q.oninput=function(){var v=q.value.toLowerCase(),k=0;document.querySelectorAll('#gr .card').forEach(function(x){var s=x.textContent.toLowerCase().indexOf(v)>-1;x.style.display=s?'':'none';if(s)k++});
+var e=document.getElementById('none');if(e)e.hidden=k>0};
 var f=document.querySelector('form[data-netlify]'),m=document.getElementById('fm');
 if(f&&window.fetch)f.addEventListener('submit',function(e){e.preventDefault();var s=f.querySelector('button');s.disabled=true;s.textContent='Sending...';
 fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
